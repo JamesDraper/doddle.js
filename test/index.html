@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Mocha Tests</title>
+        <meta charset="utf-8">
+        <link href="../node_modules/mocha/mocha.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id="mocha"></div>
+        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../node_modules/mocha/mocha.js"></script>
+        <script src="../node_modules/expect.js/index.js"></script>
+        <script src="../dist/doddle.js"></script>
+        <script src="../dist/jquery.doddle.js"></script>
+        <script>mocha.setup('bdd')</script>
+        <script src="test.doddle.js"></script>
+        <script src="test.jquery.doddle.js"></script>
+        <script type="text/doddle-template" id="tpl1">
+            One {{ vars["Two"] }} Three {{ vars["Four"] }}
+        </script>
+        <script type="text/doddle-template" id="tpl2">
+            One {{ vars["Two"] }} Three {# comment #}{{ vars["Four"] }}
+        </script>
+        <script type="text/doddle-template" id="tpl3">
+            One {{ vars["Two"] }} Three {% if (vars.Two === 2) { %}{{ vars["Four"] }}{% } %}
+        </script>
+        <script>
+            mocha.checkLeaks();
+            mocha.globals(['jQuery']);
+            mocha.run();
+        </script>
+        <div id="testing-area" style="display: none"></div>
+    </body>
+</html>
